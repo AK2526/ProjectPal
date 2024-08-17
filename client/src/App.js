@@ -5,6 +5,8 @@ import Core from './pages/core';
 import Navbar from './components/Navbar';
 import AddFeatures from './pages/features';
 import Platforms from './pages/platforms';
+import Generate from './pages/generate';
+import List from './pages/list';
 
 export const currentContext = createContext();
 
@@ -21,6 +23,8 @@ function App() {
           <Route path="/core" element={<Core/>} />
           <Route path="/features" element={<AddFeatures/>} />
           <Route path="/platforms" element={<Platforms/>} />
+          <Route path="/generate" element={<Generate/>} />
+          <Route path="/list" element={<List/>} />
         </Routes>
       </Router>
     </currentContext.Provider>

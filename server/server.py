@@ -26,7 +26,7 @@ def send_prompt(prompt):
 # Get Json response
 def send_prompt_json(prompt):
     received = modelJson.generate_content(prompt)
-    return received.json()
+    return received.text
 
 # Test route
 @app.route('/')
@@ -48,8 +48,11 @@ def generate():
 def generate_json():
     try:
         data = request.json
+        print(data)
         prompt = data['prompt']
-        return {"text": send_prompt_json(prompt)}
+        ans = send_prompt_json(prompt)
+        print(ans)
+        return {"text": ans}
     except Exception as e:
         return {"text": []}
 

@@ -23,7 +23,7 @@ const getGeneratedJson = async (text) => {
         body: JSON.stringify({ prompt: text }),
     });
     const result = await response.json();
-    return result;
+    return JSON.parse(result.text);
 }
 
 // Function to generate an idea
@@ -54,7 +54,12 @@ export const generateFeature = async (coreIdea, featurePrompt, existingFeatures)
 
 }
 
+// Function to figure out what tools to use
+export const generateTools = async (idea, features) => {
+    return getGeneratedResult("Generate a list of tools, softwares, languages, etc. for the following programming project with the core idea: " + idea + ". The following features have been added: " + features + ". Return the tools in a bulleted list, with 2-3 words for purpose. No jargon, straight to list. No headings or asterisks. Only add tools, no general information.. Don't offer options.");
+}
+
 // Function to generate final project plan
 export const generateProjectPlan = async (idea, features, tools) => {
-    return getGeneratedJson("Generate a comprehensive project plan for a programming project with the core idea: " + idea + ". The following features have been added: " + features + ". I'm using the following tools: " + tools + ". Return a comprehensive list of tasks (only titles)");
+    return getGeneratedJson("Generate a comprehensive project plan for a programming project with the core idea: " + idea + ". The following features have been added: " + features + ". I'm using the following tools: " + tools + ". Return a comprehensive json list of tasks for this program (only titles)");
 }

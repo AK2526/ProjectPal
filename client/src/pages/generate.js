@@ -8,12 +8,12 @@ function Generate() {
 
     const nav = useNavigate();
     generateProjectPlan(data.idea, data.features, data.tools)
-    .then(a => setData(
+    .then(a => {console.log(a); setData(
         {idea: data.idea, 
         features: data.features, 
         tools: data.tools, 
         plan: a,
-        done: a.map((b, i)=> false)}))
+        done: a.map((b, i)=> false)})})
 
     useEffect(() => {
         if (data.plan === undefined)

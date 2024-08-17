@@ -13,7 +13,13 @@ function Generate() {
         features: data.features, 
         tools: data.tools, 
         plan: a,
-        done: a.map((b, i)=> false)})})
+        done: a.map((b, i)=> false),
+        info: a.map((b, i)=> "##Loading..."),
+        questions: a.map((b, i)=> ""),
+        answers: a.map((b, i)=> null),
+
+    }
+    )})
 
     useEffect(() => {
         if (data.plan === undefined)

@@ -12,10 +12,11 @@ function Checkbox({ index }) {
         setData(newData)
     }
     return (
-        <div className='flex flex-row p-4 pl-8 rounded-md border-4 border-gray-400 hover:border-white hover:cursor-pointer bg-slate-900 hover:bg-slate-500' onClick={() => nav("/info/" + index)}>
+        <div className='flex flex-row p-4 pl-8 rounded-md border-4 border-gray-400 hover:border-white  bg-slate-900 '>
             <input type="checkbox" className='' style={{transform: 'scale(4)'}} checked={data.done[index]} onChange={handleChange}/>
             <div className='ml-8'>
             <label className='text-white text-3xl'>{data.plan[index]}</label>
+            <a onClick={() => nav("/info/" + index)} className='text-gray-500 text-2xl ml-4 hover:cursor-pointer'>More info</a>
             </div>
             
 

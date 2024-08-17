@@ -1,8 +1,8 @@
-import React, { useContext, useState} from 'react'
+import React, { useContext, useEffect, useState} from 'react'
 import { useNavigate } from 'react-router-dom'
 import Formfield from '../components/Formfield'
 import Button from '../components/Button'
-import { generateIdea } from '../lib/helpers'
+import { generateIdea, getYoutubeSearchResults } from '../lib/helpers'
 import { currentContext } from '../App'
 
 function Core() {
@@ -37,6 +37,8 @@ function Core() {
 
             {idea && <Button title="I'm happy with my idea!" styles="mt-4" containerStyles='mt-5' fn={()=>{setData({idea: idea}); nav("/features")}}/>}
 
+
+            
         </div>
     )
 }

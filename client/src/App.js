@@ -7,6 +7,7 @@ import AddFeatures from './pages/features';
 import Platforms from './pages/platforms';
 import Generate from './pages/generate';
 import List from './pages/list';
+import InfoPage from './pages/infopage';
 
 export const currentContext = createContext();
 
@@ -25,6 +26,7 @@ function App() {
           <Route path="/platforms" element={<Platforms/>} />
           <Route path="/generate" element={<Generate/>} />
           <Route path="/list" element={<List/>} />
+          <Route path="/info/:index" element={<InfoPage/>} />
         </Routes>
       </Router>
     </currentContext.Provider>

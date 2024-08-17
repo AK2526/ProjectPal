@@ -22,8 +22,20 @@ const getGeneratedJson = async (text) => {
         },
         body: JSON.stringify({ prompt: text }),
     });
-    const result = await response.json();
-    return JSON.parse(result.text);
+    const b = await response.json();
+    let result = b.text;
+    // console.log(result, result.substring(result.length - 1))
+    // if (result.substring(result.length - 1) !== "]")
+    // {
+    //     result = result + "]";
+    // }
+    try {
+        return JSON.parse(result)
+    } catch (error) {
+        return await getGeneratedJson(text);
+    }
+
+    ;
 }
 
 // Function to generate an idea
@@ -62,4 +74,25 @@ export const generateTools = async (idea, features) => {
 // Function to generate final project plan
 export const generateProjectPlan = async (idea, features, tools) => {
     return getGeneratedJson("Generate a comprehensive project plan for a programming project with the core idea: " + idea + ". The following features have been added: " + features + ". I'm using the following tools: " + tools + ". Return a comprehensive json list of tasks for this program (only titles)");
+}
+
+// Function to generate information about a step
+export const generateInfo = async (idea, features, tools, step) => {
+    return getGeneratedResult("Generate information about the following step in the programming project with the core idea: " + idea + ". The following features are to be added: " + features + ". The user is using the following tools: " + tools + ". The user has requested information about the following step: " + step + ". Return  information about the step. Don't add any code.");
+}
+
+// Function to get youtube search results
+export const getYoutubeSearchResults = async (text) => {
+    const response = await fetch("http://localhost:5000/youtube", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ prompt: text }),
+    });
+    const result = await response.json();
+    if (result.items === undefined) {
+        return [];
+    }
+    return result.items;
 }

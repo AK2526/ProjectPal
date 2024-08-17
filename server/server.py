@@ -4,7 +4,8 @@ from flask_cors import CORS
 import google.generativeai as genai
 
 # API keys in security.py
-from security import gemini_key
+from security import gemini_key, youtube_key
+import requests
 
 
 # Create app
@@ -18,14 +19,23 @@ model = genai.GenerativeModel('gemini-1.5-flash')
 # Json model
 modelJson = genai.GenerativeModel('gemini-1.5-flash',generation_config={"response_mime_type": "application/json"})
 
+
+# DEBUG
+DEBUG = True
+
+
 # Function to send prompt
 def send_prompt(prompt):
     received = model.generate_content(prompt)
+    if DEBUG:
+        print(received.text)
     return received.text
 
 # Get Json response
 def send_prompt_json(prompt):
     received = modelJson.generate_content(prompt)
+    if DEBUG:
+        print(received.text)
     return received.text
 
 # Test route
@@ -56,6 +66,20 @@ def generate_json():
     except Exception as e:
         return {"text": []}
 
+# Get youtube searches
+@app.route('/youtube', methods=['POST'])
+def youtube():
+    try:
+        data = request.json
+        prompt = data['prompt']
+        # Make GET request to YouTube API
+        response = requests.get('https://www.googleapis.com/youtube/v3/search', params={'q': prompt, 'key': youtube_key, 'maxResults':3})
+        print(response.json())
+        # Parse the response
+        data = response.json()
+        return data
+    except Exception as e:
+        return {"error": "An error occurred"}
 
 if __name__ == '__main__':
     app.run(debug=True)

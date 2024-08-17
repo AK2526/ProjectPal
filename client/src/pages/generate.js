@@ -15,8 +15,7 @@ function Generate() {
         plan: a,
         done: a.map((b, i)=> false),
         info: a.map((b, i)=> "##Loading..."),
-        questions: a.map((b, i)=> ""),
-        answers: a.map((b, i)=> null),
+        videos: a.map((b, i)=> []),
 
     }
     )})

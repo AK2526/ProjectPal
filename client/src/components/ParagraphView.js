@@ -3,7 +3,6 @@ import SmartText from './SmartText';
 
 function ParagraphView({ text }) {
     const arr = text.split('\n');
-    console.log(text)
     return (
         <div className='mt-5'>
             {

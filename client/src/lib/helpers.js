@@ -102,3 +102,8 @@ export const getVideos = async (info, step) => {
     getGeneratedResult("From the following passage, generate a general search query for a youtube video for the particular step as follows. No other information. Only one sentence which sums up this particular step which is - " + "- and can be directly pasted on Youtube. Other info: " + info);
     return await getYoutubeSearchResults(info);
 }
+
+// Function that helps answer your question
+export const answerQuestion = async (question, info, idea) => {
+    return getGeneratedResult("Answer the following question: " + question + ". The project idea is: " + idea + ". The following information is available: " + info);
+}

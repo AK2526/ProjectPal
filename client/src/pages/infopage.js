@@ -1,14 +1,21 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { currentContext } from '../App'
 import { useParams } from 'react-router-dom'
-import { generateInfo, getVideos } from '../lib/helpers'
+import { answerQuestion, generateInfo, getVideos } from '../lib/helpers'
 import ParagraphView from '../components/ParagraphView'
 import Video from '../components/Video'
+import Formfield from '../components/Formfield'
+import Button from '../components/Button'
 
 function InfoPage() {
     const { index } = useParams()
 
     const { data, setData } = useContext(currentContext)
+
+    const [question, setQuestion] = useState("")
+    const [answer, setAnswer] = useState("")
+    const [updateButton, setupdateButton] = useState(0)
+    const [loading, setloading] = useState(false)
 
     const handleChange = (e) => {
         const newData = { ...data }
@@ -27,6 +34,16 @@ function InfoPage() {
             setData(newData)
 
         }
+    }
+
+    const askQuestion = async () => {
+        if (question === "") {
+            return;
+        }
+        setloading(true)
+        setAnswer(await answerQuestion(question, data.info[index], data.idea))
+        setloading(false)
+        setupdateButton(prev => prev + 1)
     }
 
     useEffect(() => {
@@ -49,18 +66,35 @@ function InfoPage() {
 
             <ParagraphView text={data.info[index]} />
 
-            
+
             {data.videos[index].length !== 0 &&
-            <div className=''>
-            <h2 className='text-white text-3xl font-semibold mt-4 text-center mt-7'>Related Videos</h2>
-                <div className='flex flex-row justify-evenly'>
-                    
-                    {data.videos[index].map((video, i) =>
-                        {return <Video data={video} key={i} />} )}
+                <div className=''>
+                    <h2 className='text-white text-3xl font-semibold my-8 text-center '>Related Videos</h2>
+                    <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3'>
+
+                        {data.videos[index].map((video, i) => { return <Video data={video} key={i} /> })}
+                    </div>
                 </div>
-            </div>
 
             }
+
+            {data.info[index] !== "##Loading..." &&
+                <div>
+                    <h3 className='text-white text-3xl font-semibold mt-4'>Have a question?</h3>
+                    <div className='flex flex-row justify-evenly'>
+                        <div className='w-[70%]'> <Formfield value={question} setvalue={setQuestion} placeholder={"Type your question here"} /></div>
+                        <div className='w-[30%]'><Button title="Ask" styles="m-3" fn={askQuestion} setVisible={updateButton} /></div>
+
+                    </div>
+
+                </div>}
+            {loading && <h2 className='text-white text-2xl font-semibold mt-4 text-center'>Loading...</h2>}
+
+            {answer !== "" &&
+                <div>
+                    <ParagraphView text={answer} />
+                </div>
+}
         </div>
     )
 }

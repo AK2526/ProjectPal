@@ -4,6 +4,7 @@ import Home from './pages/home';
 import Core from './pages/core';
 import Navbar from './components/Navbar';
 import AddFeatures from './pages/features';
+import Platforms from './pages/platforms';
 
 export const currentContext = createContext();
 
@@ -19,6 +20,7 @@ function App() {
           <Route path="/" element={<Home/>} />
           <Route path="/core" element={<Core/>} />
           <Route path="/features" element={<AddFeatures/>} />
+          <Route path="/platforms" element={<Platforms/>} />
         </Routes>
       </Router>
     </currentContext.Provider>

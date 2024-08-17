@@ -15,17 +15,25 @@ CORS(app)
 genai.configure(api_key=gemini_key)
 model = genai.GenerativeModel('gemini-1.5-flash')
 
+# Json model
+modelJson = genai.GenerativeModel('gemini-1.5-flash',generation_config={"response_mime_type": "application/json"})
+
 # Function to send prompt
 def send_prompt(prompt):
     received = model.generate_content(prompt)
     return received.text
+
+# Get Json response
+def send_prompt_json(prompt):
+    received = modelJson.generate_content(prompt)
+    return received.json()
 
 # Test route
 @app.route('/')
 def home():
     return 'Hello, World!'
 
-# Test generative AI route
+# Connect to model
 @app.route('/generate', methods=['POST'])
 def generate():
     try:
@@ -34,6 +42,16 @@ def generate():
         return {"text": send_prompt(prompt)}
     except Exception as e:
         return {"text": ""}
+    
+# Connect to JSON model
+@app.route('/generate_json', methods=['POST'])
+def generate_json():
+    try:
+        data = request.json
+        prompt = data['prompt']
+        return {"text": send_prompt_json(prompt)}
+    except Exception as e:
+        return {"text": []}
 
 
 if __name__ == '__main__':

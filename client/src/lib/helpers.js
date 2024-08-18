@@ -73,7 +73,7 @@ export const generateTools = async (idea, features) => {
 
 // Function to generate final project plan
 export const generateProjectPlan = async (idea, features, tools) => {
-    return getGeneratedJson("Generate a comprehensive project plan for a programming project with the core idea: " + idea + ". The following features have been added: " + features + ". I'm using the following tools: " + tools + ". Return a comprehensive json list of tasks for this program (only titles)");
+    return getGeneratedJson("Generate a comprehensive project plan for a programming project with the core idea: " + idea + ". The following features have been added: " + features + ". I'm using the following tools: " + tools + ". Return a comprehensive json list of tasks for this program but dont add anything that is too general, one sentence per task. Return a List[String]");
 }
 
 // Function to generate information about a step

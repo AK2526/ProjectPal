@@ -1,11 +1,17 @@
 import React from 'react'
+import logo from '../assets/logo.jpeg'
 
 function Navbar() {
   return (
-    <div className='bg-primary shadow-md sticky top-0 z-50 '>
-        <p className='text-white text-3xl text-center text-bold justify-center p-5'>Project Pal</p>
+    <a href='/'>
+      <div className='bg-primary shadow-md sticky top-0 z-50 flex flex-row p-4 justify-center'>
 
-    </div>
+        <img src={logo} alt='logo' className='w-12 h-12 object-cover rounded-md border-2 border-white' style={{ transform: "scaleX(-1)" }} />
+        <p className='text-white text-3xl text-center text-bold justify-center px-3'>Project Pal</p>
+        <img src={logo} alt='logo' className='w-12 h-12 object-cover rounded-md border-2 border-white' />
+
+      </div>
+    </a>
   )
 }
 

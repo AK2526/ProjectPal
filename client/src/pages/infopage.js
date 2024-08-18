@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { currentContext } from '../App'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { answerQuestion, generateInfo, getVideos } from '../lib/helpers'
 import ParagraphView from '../components/ParagraphView'
 import Video from '../components/Video'
@@ -16,6 +16,8 @@ function InfoPage() {
     const [answer, setAnswer] = useState("")
     const [updateButton, setupdateButton] = useState(0)
     const [loading, setloading] = useState(false)
+
+    const nav = useNavigate();
 
     const handleChange = (e) => {
         const newData = { ...data }
@@ -55,9 +57,12 @@ function InfoPage() {
         console.log(data.videos[index])
     }, [data.videos])
     return (
-        <div className='p-10'>
+        <div className='px-10'>
+            <div className='w-44 my-6'>
+            <Button fn={() => nav("/list")} title={"Go back"} />
+            </div>
             <div className='flex flex-row  pl-8 rounded-md justify-center  '>
-                <input type="checkbox" className='' style={{ transform: 'scale(4)' }} checked={data.done[index]} onChange={handleChange} />
+                <input type="checkbox" className='h-[15px] mt-7' style={{ transform: 'scale(4)' }} checked={data.done[index]} onChange={handleChange} />
                 <div className='ml-8'>
                     <label className='text-white text-5xl'>{data.plan[index]}</label>
                 </div>

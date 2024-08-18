@@ -41,7 +41,7 @@ function AddFeatures() {
 
             <Textfield label="" placeholder={"You can edit this box!"} value={features} setValue={setFeatures} rows={10} />
 
-            <Button title="I'm happy with my features!" styles="mt-4" containerStyles='mt-5' fn={()=>{setData({idea: data.idea, features: features}); nav("/platforms")}}/>
+            { features !== "" && <Button title="I'm happy with my features!" styles="mt-4" containerStyles='mt-5' fn={()=>{setData({idea: data.idea, features: features}); nav("/platforms")}}/>}
 
         </div>
     )

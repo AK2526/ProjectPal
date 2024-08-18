@@ -23,9 +23,9 @@ function Core() {
 
     return (
         <div className='p-10'>
-            <h1 className='text-white text-4xl font-semibold '>Let's come up with an idea!</h1>
+            <h1 className='text-white text-4xl font-semibold mb-7 '>Let's come up with an idea!</h1>
 
-            <h2 className='text-gray-400 text-2xl font-semibold'>Enter ideas below or leave blank for a random idea</h2>
+            <h2 className='text-gray-400 text-2xl font-semibold'>Enter your ideas below or leave blank for a random idea</h2>
             <Formfield value={input} setvalue={setinput} />
             
             <div className='flex-row flex justify-end '>
